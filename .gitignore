@@ -1,0 +1,12 @@
+*.exe
+*.txt
+*.out
+.vscode
+
+/build
+/temp
+
+0_hello.cpp
+
+
+
