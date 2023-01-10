@@ -12,38 +12,25 @@ void stayTORO() {
 	#endif 
 }
 
-// Kadane's Algorithm
-
 class Solution {
 public:
-    vector<int> maxSubArray(vector<int>& nums) {
-        int max_so_far = INT_MIN;
-        int max_ending_here = 0;
-        int start = 0;
-        int currStart = 0;
-        int end = 0;
+    int maxProfit(vector<int>& prices) {
+        int min_so_far, max_so_far, max_profit;
+        min_so_far = max_so_far = prices[0];
+        max_profit = 0;
 
-        for (int i = 0; i < nums.size(); i++) {
-            max_ending_here += nums[i];
-            
-            if(max_ending_here > max_so_far) {
-                start = currStart;
-                end = i;
-                max_so_far = max_ending_here;
+        for (int i = 0; i < prices.size(); i++) {
+            if(prices[i] > max_so_far) {
+                max_so_far = prices[i];
+                max_profit = max(max_profit, max_so_far - min_so_far);
             }
 
-            if(max_ending_here < 0) {
-                currStart = i+1;
-                max_ending_here = 0;
+            if(prices[i] < min_so_far) {
+                min_so_far = max_so_far = prices[i];
             }
         }
 
-        vector<int> ans;
-        for (int i = start; i <= end; i++) {
-            ans.push_back(nums[i]);
-        }
-
-        return ans;
+        return max_profit;
     }
 };
 
@@ -60,19 +47,14 @@ int main() {
     }
 
     Solution S;
-    vector<int> ans = S.maxSubArray(arr);
-
-    for (int i = 0; i < ans.size(); i++) {
-        cout << ans[i] << " ";
-    }
+    cout<<S.maxProfit(arr);
 
     return 0;
 }
 
 // == IN ==
-// 9
-// -2 1 -3 4 -1 2 1 -5 4
 // 6
+// 7 1 5 3 6 4 
 
 // == OUT ==
-// 4 -1 2 1
+// 5
