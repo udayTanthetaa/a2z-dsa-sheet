@@ -14,7 +14,7 @@ void stayTORO() {
 
 class Solution {
    public:
-    int peakElement(const vector<int> &arr) {
+    int bitonicMax(const vector<int> &arr) {
         int start = 0;
         int end = arr.size() - 1;
 
@@ -23,8 +23,8 @@ class Solution {
         while (start <= end) {
             mid = start + (end - start) / 2;
 
-            if ((mid == 0 || arr[mid] > arr[mid - 1]) &&
-                (mid == arr.size() - 1 || arr[mid] > arr[mid + 1])) {
+            if ((arr[mid] == 0 || arr[mid] > arr[mid - 1]) &&
+                (arr[mid] == arr.size() - 1 || arr[mid] > arr[mid + 1])) {
                 break;
             }
 
@@ -35,7 +35,7 @@ class Solution {
             }
         }
 
-        return mid;
+        return arr[mid];
     }
 };
 
@@ -53,14 +53,14 @@ int main() {
 
     Solution S;
 
-    cout << S.peakElement(arr);
+    cout << S.bitonicMax(arr);
 
     return 0;
 }
 
 // == IN ==
-// 9
-// 30 40 50 5 10 20 30 40 50
+// 6
+// 1 3 8 12 4 2
 
 // == OUT ==
-// 10
+// 12
